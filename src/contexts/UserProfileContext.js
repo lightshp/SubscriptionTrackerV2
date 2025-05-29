@@ -17,22 +17,22 @@ export const UserProfileProvider = ({ children }) => {
 
   const updateLanguage = (newLanguage) => {
     setPreferences(prev => ({ ...prev, language: newLanguage }));
-    console.log('UserProfileContext: Language updated to', newLanguage); // For debugging
+    // console.log('UserProfileContext: Language updated to', newLanguage); // Removed
   };
 
   const updateTheme = (newTheme) => {
     setPreferences(prev => ({ ...prev, theme: newTheme }));
-    console.log('UserProfileContext: Theme updated to', newTheme); // For debugging
+    // console.log('UserProfileContext: Theme updated to', newTheme); // Removed
   };
 
   const updateCurrency = (newCurrency) => {
     setPreferences(prev => ({ ...prev, currency: newCurrency }));
-    console.log('UserProfileContext: Currency updated to', newCurrency); // For debugging
+    // console.log('UserProfileContext: Currency updated to', newCurrency); // Removed
   };
 
   const updateTimezone = (newTimezone) => {
     setPreferences(prev => ({ ...prev, timezone: newTimezone }));
-    console.log('UserProfileContext: Timezone updated to', newTimezone); // For debugging
+    // console.log('UserProfileContext: Timezone updated to', newTimezone); // Removed
   };
 
   // In a real app, you might have a function to load preferences from a backend/localStorage

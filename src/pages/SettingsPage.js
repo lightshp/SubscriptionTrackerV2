@@ -1,12 +1,14 @@
 // src/pages/SettingsPage.js
 import React from 'react';
 import { useUserProfile } from '../contexts/UserProfileContext'; // Adjust path if needed
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const SettingsPage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const { preferences, updateLanguage, updateTheme, updateCurrency, updateTimezone } = useUserProfile();
 
   if (!preferences) {
-    return <div>Loading user preferences...</div>; // Or some other loading state
+    return <div>{t('loading_preferences', 'Loading user preferences...')}</div>;
   }
 
   const handleLanguageChange = (event) => {
@@ -40,11 +42,11 @@ const SettingsPage = () => {
 
   return (
     <div>
-      <h2>Settings</h2>
-      <p>Manage your profile preferences below.</p>
+      <h2>{t('settings_page_title')}</h2>
+      <p>{t('settings_page_description')}</p>
 
       <div>
-        <label htmlFor="language-select" style={commonLabelStyle}>Language:</label>
+        <label htmlFor="language-select" style={commonLabelStyle}>{t('language_label')}</label>
         <select 
           id="language-select" 
           value={preferences.language} 
@@ -58,7 +60,7 @@ const SettingsPage = () => {
       </div>
 
       <div>
-        <label htmlFor="theme-select" style={commonLabelStyle}>Theme:</label>
+        <label htmlFor="theme-select" style={commonLabelStyle}>{t('theme_label')}</label>
         <select 
           id="theme-select" 
           value={preferences.theme} 
@@ -71,7 +73,7 @@ const SettingsPage = () => {
       </div>
 
       <div>
-        <label htmlFor="currency-select" style={commonLabelStyle}>Default Currency:</label>
+        <label htmlFor="currency-select" style={commonLabelStyle}>{t('default_currency_label')}</label>
         <select 
           id="currency-select" 
           value={preferences.currency} 
@@ -87,7 +89,7 @@ const SettingsPage = () => {
       </div>
 
       <div>
-        <label htmlFor="timezone-select" style={commonLabelStyle}>Timezone:</label>
+        <label htmlFor="timezone-select" style={commonLabelStyle}>{t('timezone_label')}</label>
         <select 
           id="timezone-select" 
           value={preferences.timezone} 

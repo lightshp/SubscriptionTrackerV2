@@ -1,5 +1,6 @@
 // src/contexts/SubscriptionContext.js
 import React, { createContext, useState, useContext } from 'react';
+import { calculateNextPaymentDate } from '../utils/dateUtils'; // Import the new utility
 
 /**
  * Subscription Object Structure:
@@ -82,18 +83,22 @@ export const SubscriptionProvider = ({ children }) => {
   const addSubscription = (subscriptionData) => {
     const newSubscription = {
       ...subscriptionData,
-      id: Date.now().toString(), // Simple ID generation for mock
-      // nextPaymentDate: calculateNextPaymentDate(subscriptionData.startDate, subscriptionData.billingFrequency, subscriptionData.customFrequencyDays), // Actual calculation needed
-      isActive: true, // Default to active
+      id: Date.now().toString(),
+      // Calculate nextPaymentDate using the utility function
+      nextPaymentDate: calculateNextPaymentDate(
+        subscriptionData.startDate, 
+        subscriptionData.billingFrequency, 
+        subscriptionData.customFrequencyDays
+      ),
+      isActive: subscriptionData.isActive !== undefined ? subscriptionData.isActive : true, // Ensure isActive has a default
     };
     setSubscriptions(prevSubs => [...prevSubs, newSubscription]);
-    console.log('SubscriptionContext: Added subscription', newSubscription);
-    // In a real app, save to backend/localStorage
+    // console.log('SubscriptionContext: Added subscription', newSubscription); // Removed
   };
 
   const deleteSubscription = (subscriptionId) => {
     setSubscriptions(prevSubs => prevSubs.filter(sub => sub.id !== subscriptionId));
-    console.log('SubscriptionContext: Deleted subscription with ID', subscriptionId);
+    // console.log('SubscriptionContext: Deleted subscription with ID', subscriptionId); // Removed
     // In a real app, update backend/localStorage
   };
 
@@ -101,7 +106,7 @@ export const SubscriptionProvider = ({ children }) => {
     setSubscriptions(prevSubs =>
       prevSubs.map(sub => (sub.id === subscriptionId ? { ...sub, ...updatedData } : sub))
     );
-    console.log('SubscriptionContext: Updated subscription with ID', subscriptionId, 'Data:', updatedData);
+    // console.log('SubscriptionContext: Updated subscription with ID', subscriptionId, 'Data:', updatedData); // Removed
     // In a real app, update backend/localStorage
   };
 

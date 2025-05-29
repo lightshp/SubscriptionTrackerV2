@@ -31,14 +31,16 @@ const AddSubscriptionForm = () => {
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
           const subscriptionData = {
-            ...values,
-            customFrequencyDays: null,
-            category: 'Other',
-            startDate: new Date().toISOString().split('T')[0],
-            nextPaymentDate: new Date().toISOString().split('T')[0], // Placeholder
-            paymentMethod: null,
-            notes: null,
-            isActive: true,
+            ...values, // serviceName, cost, currency, billingFrequency
+            // Defaulting other fields that are not yet in the form.
+            // These will be properly handled when the form is expanded.
+            customFrequencyDays: values.customFrequencyDays || null, 
+            category: values.category || 'Other', 
+            startDate: values.startDate || new Date().toISOString().split('T')[0], 
+            // nextPaymentDate is now removed from here; it will be calculated by the context.
+            paymentMethod: values.paymentMethod || null, 
+            notes: values.notes || null, 
+            isActive: values.isActive !== undefined ? values.isActive : true,
           };
           await addSubscription(subscriptionData);
           alert(t('subscription_added_alert', 'Subscription added successfully!')); // Example for alert
@@ -74,8 +76,9 @@ const AddSubscriptionForm = () => {
           <div style={{ marginBottom: '10px' }}>
             <label htmlFor="billingFrequency">{t('billing_frequency_label')}</label>
             <Field as="select" name="billingFrequency" style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}>
-              <option value="Monthly">{t('frequency_monthly', 'Monthly')}</option> {/* Example for option */}
-              <option value="Yearly">{t('frequency_yearly', 'Yearly')}</option>   {/* Example for option */}
+              <option value="Monthly">{t('frequency_monthly', 'Monthly')}</option>
+              <option value="Yearly">{t('frequency_yearly', 'Yearly')}</option>
+              <option value="Quarterly">{t('frequency_quarterly', 'Quarterly')}</option> {/* Added Quarterly */}
             </Field>
             <ErrorMessage name="billingFrequency" component="div" style={{ color: 'red', fontSize: '0.9em' }} />
           </div>

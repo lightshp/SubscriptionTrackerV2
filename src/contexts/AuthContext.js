@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(response.user);
       return response;
     } catch (error) {
-      console.error('Login failed in context:', error);
+      // console.error('Login failed in context:', error); // Removed
       throw error;
     }
   };
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       // setCurrentUser(loginResponse.user);
       return response;
     } catch (error) {
-      console.error('Registration failed in context:', error);
+      // console.error('Registration failed in context:', error); // Removed
       throw error;
     }
   };
