@@ -1,3 +1,19 @@
 {
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "login_button": "Login",
+  "logout_button": "Logout",
+  "register_button": "Register",
+  "dashboard_title": "Dashboard",
+  "settings_title": "Settings",
+  "add_subscription_button": "Add Subscription",
+  "add_new_subscription_title": "Add New Subscription",
+  "email_label": "Email",
+  "password_label": "Password",
+  "service_name_label": "Service Name",
+  "cost_label": "Cost",
+  "currency_label": "Currency",
+  "billing_frequency_label": "Billing Frequency",
+  "submit_button": "Submit",
+  "create_account_title": "Create Account",
+  "login_title": "Login"
 }

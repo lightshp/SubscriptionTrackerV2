@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css'; // Assuming you have a global CSS file
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import './i18n/config'; // Initialize i18next
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -3,9 +3,11 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '../../contexts/AuthContext'; // Adjust path if needed
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
+  // Note: Yup validation messages are not typically translated via i18next in this manner.
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
     .matches(
@@ -16,6 +18,7 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
+  const { t } = useTranslation(); // Initialize hook
   const auth = useAuth(); // Get auth context
 
   return (
@@ -26,29 +29,24 @@ const RegisterForm = () => {
         try {
           await auth.register(values.email, values.password);
           console.log('Registration successful from form');
-          // Optionally redirect or show a success message
-          // e.g., history.push('/login');
-          alert('Registration successful! Please login.'); // Placeholder
+          alert(t('registration_successful_alert', 'Registration successful! Please login.')); // Example for alert
         } catch (error) {
           console.error('Registration error in form:', error);
-          setErrors({ submit: error.message || 'Registration failed' }); // Show a general error
+          setErrors({ submit: error.message || t('registration_failed_error', 'Registration failed') }); // Example for error
         }
         setSubmitting(false);
       }}
     >
       {({ isSubmitting, errors, touched }) => (
         <Form>
-          {/* Example for displaying form-level error:
-            {errors.submit && <div style={{ color: 'red' }}>{errors.submit}</div>}
-          */}
           <div>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t('email_label')}</label>
             <Field type="email" name="email" />
             <ErrorMessage name="email" component="div" style={{ color: 'red' }} />
           </div>
 
           <div>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('password_label')}</label>
             <Field type="password" name="password" />
             <ErrorMessage name="password" component="div" style={{ color: 'red' }} />
           </div>
@@ -56,7 +54,7 @@ const RegisterForm = () => {
           {errors.submit && <div style={{ color: 'red', marginTop: '10px' }}>{errors.submit}</div>}
 
           <button type="submit" disabled={isSubmitting}>
-            Register
+            {t('register_button')}
           </button>
         </Form>
       )}

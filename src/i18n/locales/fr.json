@@ -1,3 +1,19 @@
 {
-  "welcome": "Bienvenue"
+  "welcome": "Bienvenue",
+  "login_button": "Connexion",
+  "logout_button": "Déconnexion",
+  "register_button": "S'inscrire",
+  "dashboard_title": "Tableau de bord",
+  "settings_title": "Paramètres",
+  "add_subscription_button": "Ajouter un abonnement",
+  "add_new_subscription_title": "Ajouter un nouvel abonnement",
+  "email_label": "Adresse e-mail",
+  "password_label": "Mot de passe",
+  "service_name_label": "Nom du service",
+  "cost_label": "Coût",
+  "currency_label": "Devise",
+  "billing_frequency_label": "Fréquence de facturation",
+  "submit_button": "Soumettre",
+  "create_account_title": "Créer un compte",
+  "login_title": "Connexion"
 }

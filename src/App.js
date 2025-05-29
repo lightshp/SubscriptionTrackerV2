@@ -2,9 +2,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext'; // Verify path
+import { UserProfileProvider } from './contexts/UserProfileContext';
+import { SubscriptionProvider } from './contexts/SubscriptionContext'; // Add this import
 import LoginPage from './pages/LoginPage'; // Verify path
 import RegisterPage from './pages/RegisterPage'; // Verify path
 import DashboardPage from './pages/DashboardPage'; // Verify path
+import SettingsPage from './pages/SettingsPage'; // Import SettingsPage
+import AddSubscriptionPage from './pages/AddSubscriptionPage'; // Import AddSubscriptionPage
 import ProtectedRoute from './components/routes/ProtectedRoute'; // Verify path
 import Layout from './components/layout/Layout'; // Import Layout
 
@@ -35,7 +39,8 @@ function AppContent() {
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}> {/* Wrap protected routes' content with Layout */}
           <Route path="/dashboard" element={<DashboardPage />} />
-          {/* Example: <Route path="/settings" element={<SettingsPage />} /> */}
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/add-subscription" element={<AddSubscriptionPage />} /> {/* Add this route */}
           {/* Add other protected pages here later */}
         </Route>
       </Route>
@@ -49,12 +54,15 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        {/* The <header> previously here is now removed, as Layout handles it */}
-        <main> {/* Keep a main tag or div as a general container if desired, or remove if Layout is sufficient */}
-          <AppContent />
-        </main>
-      </Router>
+      <UserProfileProvider>
+        <SubscriptionProvider> {/* Add SubscriptionProvider here */}
+          <Router>
+            <main> {/* Or your top-level layout structure */}
+              <AppContent />
+            </main>
+          </Router>
+        </SubscriptionProvider>
+      </UserProfileProvider>
     </AuthProvider>
   );
 }
